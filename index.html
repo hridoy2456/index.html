@@ -84,6 +84,7 @@
       gap: 6px;
 }
     .net-speed {
+      font-family:Poppinse;
       font-size: 11px;
       color: white;
       margin-right: 2px;
@@ -113,27 +114,28 @@
       gap: 3px;
     }
     .battery-body {
-  width: 28px;
-  height: 12px;
+  width: 26px;
+  height: 11px;
   border: 1px solid #fff;
-  border-radius: 2px;
+  border-radius: 3px;
   position: relative;
   background-color: #fff;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-family: Poppinse;
+  font-size: 5px;
   font-weight: bold;
-  color: #444;
+  color: #black;
 }
 .battery-fill {
   position: absolute;
   left: 0;
   top: 0;
   height: 100%;
-  width: 70%;
-  background-color: #dff8f4;
+  width: 75%;
+  background-color: #f57c00;
   z-index: 0;
   border-radius: 2px 0 0 2px;
 }
@@ -162,9 +164,9 @@
       margin: 20px 0;
     }
     .success {
-      color: #e65100;
+      color: #f26522;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 5px;
     }
     .info-table {
@@ -176,14 +178,14 @@
       padding: 2px 0;
     }
     .label {
-      color: #f57c00;
-      font-size: 15px;
+      color: #f26522;
+      font-size: 13px;
       font-weight: 600;
     }
     .value {
       color: #6B6B6B;
       text-align: right;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 600;
     }
     .actions {
@@ -200,11 +202,11 @@
       align-items: center;
       gap: 8px;
       font-size: 16px;
-      color: #f57c00;
+      color: #f26522;
     }
     .action-btn i {
-      color: #f57c00;
-      font-size: 18px;
+      color: #f26522;
+      font-size: 15px;
     }
     .call-btn i {
       transform: rotate(90deg);
@@ -216,7 +218,7 @@
       padding: 10px 24px;
       border-radius: 20px;
       margin-top: 25px;
-      font-size: 16px;
+      font-size: 14px;
     }
     .nav-bar {
       background: white;
@@ -239,6 +241,33 @@
       color: #6B6B6B;
       font-weight: Bold;
       margin-bottom: 5px;
+    }
+        .nav-bar {
+      width: 100%; height: 30px; background: #fff;
+      display: flex; justify-content: space-around; align-items: center;
+      border-top: 1px solid #1111;
+    }
+    .nav-icon {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .diamond {
+      width: 15px; height: 15px; background: #555;
+      transform: rotate(0deg); border-radius: 2px;
+    }
+    .circle {
+      width: 15px; height: 15px; border-radius: 50%; border: 2px solid #555;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .circle-dot {
+      width: 12px; height: 12px; background: #555; border-radius: 50%;
+    }
+    .triangle {
+      width: 0; height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 13px solid #333;
+      transform: rotate(90deg);
     }
   </style>
 </head>
@@ -301,10 +330,10 @@
       <button class="btn">হোম এ ফিরে যান</button>
     </div>
 
-    <div class="nav-bar">
-      <span>▭</span>
-      <span>○</span>
-      <span>◁</span>
+      <div class="nav-bar">
+      <div class="nav-icon"><div class="diamond"></div></div>
+      <div class="nav-icon"><div class="circle"><div class="circle-dot"></div></div></div>
+      <div class="nav-icon"><div class="triangle"></div></div>
     </div>
   </div>
 
@@ -369,4 +398,4 @@
     });
   </script>
 </body>
-  </html>
+        </html>
