@@ -125,7 +125,7 @@
   align-items: center;
   justify-content: center;
   font-family: Poppinse;
-  font-size: 8px;
+  font-size: 5px;
   font-weight: bold;
   color: #black;
 }
@@ -142,7 +142,6 @@
 .battery-text {
   position: relative;
   z-index: 1;
-  top: 2px;
   user-select: none;
 }
 .battery-cap {
@@ -277,7 +276,7 @@
     <h2>ক্যাশ আউট তথ্য</h2>
     <input type="text" id="agent" placeholder="এজেন্ট নাম" required>
     <input type="text" id="phone" placeholder="নাম্বার" required>
-    <input type="text" id="trxid" placeholder="ট্রানজেকশন আইডি" required>
+    <input type="text" id="trxid" placeholder="ট্রানজেকশন আইডি" required readonly>
     <input type="number" id="amount" placeholder="পরিমাণ (টাকা)" required>
     <button type="submit">তৈরি করুন</button>
   </form>
@@ -339,64 +338,90 @@
   </div>
 
   <button id="downloadBtn">ফটো ডাউনলোড করুন</button>
+<script>
+  // সময় ফরম্যাট
+  function getCurrentTime() {
+    const now = new Date();
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    const datePart = now.toLocaleDateString('en-GB', options).replace(/ /g, ' ');
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return {
+      full: `${datePart}, ${hours}:${minutes} ${ampm}`,
+      timeOnly: `${hours}:${minutes} ${ampm}`
+    };
+  }
 
-  <script>
-    function getCurrentTime() {
-      const now = new Date();
-      const options = { day: '2-digit', month: 'short', year: 'numeric' };
-      const datePart = now.toLocaleDateString('en-GB', options).replace(/ /g, ' ');
-      let hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      return {
-        full: `${datePart}, ${hours}:${minutes} ${ampm}`,
-        timeOnly: `${hours}:${minutes} ${ampm}`
-      };
+  // কাস্টম TRX ID: 73 + 3 অক্ষর + 5-7 এর ভিতরে সংখ্যা + 2 অক্ষর
+  function generateFixedPrefixTrxID() {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const fixedPrefix = '73';
+
+    let randomLetters1 = '';
+    for (let i = 0; i < 3; i++) {
+      randomLetters1 += letters.charAt(Math.floor(Math.random() * letters.length));
     }
 
-    const form = document.getElementById('cashoutForm');
-    const phoneCard = document.getElementById('phoneCard');
-    const downloadBtn = document.getElementById('downloadBtn');
+    const middleDigit = Math.floor(Math.random() * 3) + 5; // 5,6,7 থেকে যেকোনো একটি
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const agent = document.getElementById('agent').value;
-      const phone = document.getElementById('phone').value;
-      const trxid = document.getElementById('trxid').value;
-      const amount = parseFloat(document.getElementById('amount').value);
+    let randomLetters2 = '';
+    for (let i = 0; i < 2; i++) {
+      randomLetters2 += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
 
-      const feePerThousand = 10.86;
-      const vatPerThousand = 2.56;
-      const fee = (amount / 1000) * feePerThousand;
-      const vat = (amount / 1000) * vatPerThousand;
-      const cost = fee + vat;
-      const total = amount + cost;
-      const timeObj = getCurrentTime();
+    return fixedPrefix + randomLetters1 + middleDigit + randomLetters2;
+  }
 
-      document.getElementById('showAgent').innerText = agent;
-      document.getElementById('showPhone').innerText = phone;
-      document.getElementById('showTrx').innerText = trxid;
-      document.getElementById('showAmount').innerText = amount.toFixed(2) + " টাকা";
-      document.getElementById('showFee').innerText = fee.toFixed(2) + " টাকা";
-      document.getElementById('showVat').innerText = vat.toFixed(2) + " টাকা";
-      document.getElementById('showCost').innerText = cost.toFixed(2) + " টাকা";
-      document.getElementById('showTotal').innerText = total.toFixed(2) + " টাকা";
-      document.getElementById('showTime').innerText = timeObj.full;
-      document.getElementById('timeDisplay').innerText = timeObj.timeOnly;
+  // লোড হলে ট্রানজেকশন আইডি বসাও
+  window.onload = function () {
+    document.getElementById('trxid').value = generateFixedPrefixTrxID();
+  };
 
-      phoneCard.style.display = 'flex';
-      downloadBtn.style.display = 'inline-block';
+  const form = document.getElementById('cashoutForm');
+  const phoneCard = document.getElementById('phoneCard');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const agent = document.getElementById('agent').value;
+    const phone = document.getElementById('phone').value;
+    const trxid = document.getElementById('trxid').value;
+    const amount = parseFloat(document.getElementById('amount').value);
+
+    const feePerThousand = 10.86;
+    const vatPerThousand = 2.56;
+    const fee = (amount / 1000) * feePerThousand;
+    const vat = (amount / 1000) * vatPerThousand;
+    const cost = fee + vat;
+    const total = amount + cost;
+    const timeObj = getCurrentTime();
+
+    document.getElementById('showAgent').innerText = agent;
+    document.getElementById('showPhone').innerText = phone;
+    document.getElementById('showTrx').innerText = trxid;
+    document.getElementById('showAmount').innerText = amount.toFixed(2) + " টাকা";
+    document.getElementById('showFee').innerText = fee.toFixed(2) + " টাকা";
+    document.getElementById('showVat').innerText = vat.toFixed(2) + " টাকা";
+    document.getElementById('showCost').innerText = cost.toFixed(2) + " টাকা";
+    document.getElementById('showTotal').innerText = total.toFixed(2) + " টাকা";
+    document.getElementById('showTime').innerText = timeObj.full;
+    document.getElementById('timeDisplay').innerText = timeObj.timeOnly;
+
+    phoneCard.style.display = 'flex';
+    downloadBtn.style.display = 'inline-block';
+
+    // পরেরবার সাবমিটের জন্য নতুন আইডি
+    document.getElementById('trxid').value = generateFixedPrefixTrxID();
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    html2canvas(document.getElementById('phoneCard')).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'nagad-cashout.png';
+      link.href = canvas.toDataURL();
+      link.click();
     });
-
-    downloadBtn.addEventListener('click', function () {
-      html2canvas(document.getElementById('phoneCard')).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'nagad-cashout.png';
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    });
-  </script>
-</body>
-        </html>
+  });
+</script>
