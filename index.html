@@ -17,7 +17,7 @@
       align-items: center;
     }
     form {
-      background: #fff;
+      background: #white;
       padding: 20px;
       border-radius: 0;
       width: 340px;
@@ -27,7 +27,7 @@
     form h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #e53935;
+      color: #00695c;
     }
     input {
       width: 100%;
@@ -39,7 +39,7 @@
     }
     button {
       padding: 12px;
-      background: #f44336;
+      background: #00796b;
       color: white;
       border: none;
       border-radius: 0;
@@ -49,7 +49,7 @@
     }
     #downloadBtn {
       margin: 20px 0;
-      background: #4caf50;
+      background: #388e3c;
       display: none;
       color: white;
       font-size: 16px;
@@ -107,51 +107,52 @@
       color: white;
     }
 
-    /* নতুন ব্যাটারি আইকন CSS */
-    .battery-icon {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-    }
-    .battery-body {
-  width: 26px;
-  height: 11px;
-  border: 1px solid #fff;
-  border-radius: 3px;
-  position: relative;
-  background-color: #fff;
-  box-sizing: border-box;
+.battery {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: Poppinse;
-  font-size: 5px;
-  font-weight: bold;
-  color: #black;
+  gap: 2px;
 }
-.battery-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 75%;
-  background-color: #36760E;
-  z-index: 0;
-  border-radius: 2px 0 0 2px;
-}
-.battery-text {
+
+.battery-body {
+  width: 30px;
+  height: 13px;
+  border: 1.2px solid white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  overflow: hidden;
   position: relative;
-  z-index: 1;
-  top:-1px;
-  font-size: 8px;
-  user-select: none;
 }
+
+.battery-level {
+  height: 100%;
+  width: 86%;
+  background-color: #14B333; /* Warning yellow */
+  border-radius: 1px 0 0 1px;
+  z-index: 1;
+}
+
+.battery-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  top: -0.5px;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .battery-cap {
-  width: 3px;
-  height: 5px;
-  background-color: #108922;
-  border-radius: 1px;
-    }
+  width: 2px;
+  height: 6px;
+  background-color: white;
+  margin-left: -2px;
+  border-radius: 0 1px 1px 0;
+}
 
     .content {
       flex: 1;
@@ -275,10 +276,10 @@
 </head>
 <body>
   <form id="cashoutForm">
-    <h2>ক্যাশ আউট তথ্য</h2>
+    <h2>𝙃𝙍𝙄𝘿𝙊𝙔</h2>
     <input type="text" id="agent" placeholder="এজেন্ট নাম" required>
     <input type="text" id="phone" placeholder="নাম্বার" required>
-    <input type="text" id="trxid" placeholder="ট্রানজেকশন আইডি" required readonly>
+<input type="text" id="trxid" placeholder="ট্রানজেকশন আইডি" style="display:none;" readonly>
     <input type="number" id="amount" placeholder="পরিমাণ (টাকা)" required>
     <button type="submit">তৈরি করুন</button>
   </form>
@@ -287,32 +288,48 @@
     <div class="status-bar">
       <div class="left" id="timeDisplay">--:--</div>
       <div class="right">
-        <div class="net-speed">249.4 KB/s</div>
+        <div class="net-speed">123.59 ķв/ş</div>
         <div class="signal">
           <span class="bar bar1"></span>
           <span class="bar bar2"></span>
           <span class="bar bar3"></span>
           <span class="bar bar4"></span>
         </div>
-        <div class="wifi">ᯤ</div>
+<svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="36" r="2.5" fill="#ffff"/>
+  <path d="M17 29C20 26 28 26 31 29" stroke="#ffff" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M13 25C17 21 31 21 35 25" stroke="#ffff" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M8 20C13 15 35 15 40 20" stroke="#ffff" stroke-width="3.5" stroke-linecap="round"/>
+</svg>
+  <circle cx="24" cy="36" r="2" fill="#ffff" />
+  <path d="M17 29C20 26 28 26 31 29" stroke="#ffff" stroke-width="2" stroke-linecap="round" />
+  <path d="M13 25C17 21 31 21 35 25" stroke="#ffff" stroke-width="2" stroke-linecap="round" />
+  <path d="M8 20C13 15 35 15 40 20" stroke="#ffff" stroke-width="2" stroke-linecap="round" />
+</svg>
         <!-- নতুন ব্যাটারি এখানে -->
-        <div class="battery-icon">
-          <div class="battery-body">
-            <div class="battery-fill"></div>
-            <div class="battery-text">70%</div>
-          </div>
-          <div class="battery-cap"></div>
-        </div>
+      <div class="battery">
+  <div class="battery-body">
+    <div class="battery-level"></div>
+    <div class="battery-text">86%</div>
+  </div>
+  <div class="battery-cap"></div>
+</div>
       </div>
     </div>
 
-    <div class="content">
-      <div class="checkmark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f57c00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M9 12l2 2 4-4"/>
-        </svg>
-      </div>
+     <div class="content">
+   <div class="checkmark">
+     <svg viewBox="0 0 24 24" fill="none" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+       <defs>
+         <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+           <stop offset="0%" stop-color="#f44336" />
+           <stop offset="100%" stop-color="#fff200" />
+         </linearGradient>
+       </defs>
+       <circle cx="12" cy="12" r="10" stroke="url(#grad1)" fill="none" />
+       <path d="M8 12l2.5 2.5L16 9" stroke="#f44336" />
+     </svg>
+   </div>
       <div class="success">ক্যাশ আউট সফল</div>
       <div id="showAgent"></div>
       <div id="showPhone"></div>
@@ -325,10 +342,25 @@
         <tr><td class="label">সর্বমোট</td><td class="value" id="showTotal"></td></tr>
         <tr><td class="label">সময়</td><td class="value" id="showTime"></td></tr>
       </table>
-      <div class="actions">
-        <button class="action-btn call-btn"><i class="fas fa-phone-alt"></i> কল</button>
-        <button class="action-btn"><i class="fas fa-comment-dots"></i> মেসেজ</button>
-      </div>
+<div class="actions">    
+  <button class="action-btn">    
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="22" width="22">  
+      <path d="M22 16.92V21a2 2 0 0 1-2.18 2 19.77 19.77 0 0 1-8.63-3.17A19.5 19.5 0 0 1 3.17 8.81 2 2 0 0 1 5 6.82h4.09a1 1 0 0 1 1 .76l1.2 4.8a1 1 0 0 1-.27.95l-2.2 2.2a16 16 0 0 0 6.1 6.1l2.2-2.2a1 1 0 0 1 .95-.27l4.8 1.2a1 1 0 0 1 .76 1z"/>  
+    </svg>    
+    কল    
+  </button>    
+  <button class="action-btn">    
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64">
+  <!-- Message Box -->
+  <rect x="16" y="20" width="32" height="24" rx="2" fill="white" stroke="#E51C23" stroke-width="2"/>
+
+  <!-- Envelope Flap -->
+  <path d="M16 20L32 34L48 20" fill="none" stroke="#E51C23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+    মেসেজ    
+  </button>    
+</div>  
+
       <button class="btn">হোম এ ফিরে যান</button>
     </div>
 
@@ -342,20 +374,41 @@
   <button id="downloadBtn">ফটো ডাউনলোড করুন</button>
 <script>
   // সময় ফরম্যাট
-  function getCurrentTime() {
-    const now = new Date();
-    const options = { day: '2-digit', month: 'short', year: 'numeric' };
-    const datePart = now.toLocaleDateString('en-GB', options).replace(/ /g, ' ');
-    let hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12;
-    return {
-      full: `${datePart}, ${hours}:${minutes} ${ampm}`,
-      timeOnly: `${hours}:${minutes} ${ampm}`
-    };
-  }
-
+  function getCurrentTime() {  
+  const now = new Date();  
+  
+  function toBanglaNumber(num) {  
+    const bnNums = ['0','1','2','3','4','5','6','7','8','9'];  
+    return num.toString().split('').map(d => bnNums[parseInt(d)] || d).join('');  
+  }  
+  
+  const monthsBn = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];  
+  
+  // দিন বাংলায়  
+  const day = toBanglaNumber(now.getDate());  
+  // মাস বাংলায়  
+  const month = monthsBn[now.getMonth()];  
+  // সাল ইংরেজি  
+  const year = now.getFullYear();  
+  
+  let hours = now.getHours();  
+  let minutes = now.getMinutes();  
+  minutes = minutes < 10 ? '0' + minutes : minutes;  
+  
+  // AM/PM ইংরেজিতে  
+  const ampm = (hours >= 0 && hours < 12) ? 'AM' : 'PM';  
+  
+  // ১২-ঘণ্টার ফরম্যাটে সময়  
+  hours = hours % 12;  
+  hours = hours === 0 ? 12 : hours;  
+  
+  let timeStr = hours + ':' + minutes + ' ' + ampm;  
+  
+  return {  
+    full: `${day} ${month} ${year}, ${timeStr}`,  
+    timeOnly: timeStr  
+  };  
+}  
   // কাস্টম TRX ID: 73 + 3 অক্ষর + 5-7 এর ভিতরে সংখ্যা + 2 অক্ষর
   function generateFixedPrefixTrxID() {
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
