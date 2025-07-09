@@ -1,6 +1,6 @@
 {
   "name": "HRIDOY AHMED",
-  "short_name": "𝙽𝙰𝙶𝙰𝙳",
+  "short_name": "𝙽𝙰𝙶𝙰𝙳 𝙲𝙰𝚂𝙷 𝙾𝚄𝚃",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -8,12 +8,14 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://i.postimg.cc/25pDXMxS/1751012451131.jpg",
+     "src" : icons/icon-192.png",
+      "src": "https://i.postimg.cc/Tw6Zs3tk/1743686878819.jpg",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://i.postimg.cc/25pDXMxS/1751012451131.jpg",
+      "src" : icons/icon-512.png",
+      "src": "https://i.postimg.cc/Tw6Zs3tk/1743686878819.jpg",
       "sizes": "512x512",
       "type": "image/png"
     }
