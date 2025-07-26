@@ -421,10 +421,10 @@
   // কাস্টম TRX ID: 73 + 3 অক্ষর + 5-7 এর ভিতরে সংখ্যা + 2 অক্ষর
   function generateFixedPrefixTrxID() {
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const fixedPrefix = '73';
+    const fixedPrefix = '746';
 
     let randomLetters1 = '';
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
       randomLetters1 += letters.charAt(Math.floor(Math.random() * letters.length));
     }
 
